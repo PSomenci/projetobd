@@ -14,86 +14,85 @@ import model.bean.Eleitor;
 
 /**
  *
- * @author pedro
+ * @author pedro inserir deletar modificar
  */
 public class EleitorDAO {
-    
+
     private Connection con = null;
 
     public EleitorDAO() {
         con = ConnectionFactory.getConnection();
     }
-    
-         public void create(Eleitor e){
-        
+
+    public void create(Eleitor e) {
+
         //Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        
+
         try {
-            stmt = con.prepareStatement("INSERT INTO eleitor (nome_eleitor, cpf, zona, secao, data_nasc, rua, bairro, numero, cep) VALUES (?,?,?,?,?,?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO eleitor (nome_eleitor, cpf, cep, zona, secao, data_nasc, rua, bairro, numero) VALUES (?,?,?,?,?,?,?,?,?)");
             stmt.setString(1, e.getNome_eleitor());
-            stmt.setInt(2, e.getCpf());
-            stmt.setInt(3, e.getZona());
-            stmt.setInt(4, e.getSecao());
-            stmt.setString(5, e.getData_nasc());
-            stmt.setString(6, e.getRua());
-            stmt.setString(7, e.getBairro());
-            stmt.setString(8, e.getNumero());
-            stmt.setInt(9, e.getCep());
-            //stmt.setInt(10, e.getCod_voto().getCod_voto());
-            
+            stmt.setString(2, e.getCpf());
+            stmt.setString(3, e.getCep());
+            stmt.setInt(4, e.getZona());
+            stmt.setInt(5, e.getSecao());
+            stmt.setString(6, e.getData_nasc());
+            stmt.setString(7, e.getRua());
+            stmt.setString(8, e.getBairro());
+            stmt.setString(9, e.getNumero());
+
             stmt.executeUpdate();
-            
+
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!!");
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: "+ex);
-        }finally {
-           ConnectionFactory.closeConnection(con, stmt);
-        }
-    }
-         
-    public boolean update(Eleitor e){
-        
-        String sql = "UPDATE categoria SET nome_eleitor = ? cpf = ? zona = ? secao = ? data_nasc = ? rua = ? bairro = ? numero = ? cep = ? WHERE cpf = ?";
-        
-        PreparedStatement stmt = null;
-        
-        try {
-            stmt = con.prepareStatement(sql);
-            stmt.setString(1, e.getNome_eleitor());
-            stmt.setInt(2, e.getCpf());
-            stmt.setInt(3, e.getZona());
-            stmt.setInt(4, e.getSecao());
-            stmt.setString(5, e.getData_nasc());
-            stmt.setString(6, e.getRua());
-            stmt.setString(7, e.getBairro());
-            stmt.setString(8, e.getNumero());
-            stmt.setInt(9, e.getCep());
-            stmt.executeUpdate();
-            return true;
-        } catch (SQLException ex) {
-            System.err.println("Erro: "+ex);
-            return false;
-        }finally{
+            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
+        } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
-    public boolean delete (Eleitor e){
-        String sql = "DELETE FROM eleitor WHERE cpf = ?";
-        
+
+    public boolean update(Eleitor e) {
+
+        String sql = "UPDATE eleitor SET nome_eleitor = ? cep = ? zona = ? secao = ? data_nasc = ? rua = ? bairro = ? numero = ? WHERE cpf = ?";
+
         PreparedStatement stmt = null;
-        
+
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(2, e.getCpf());
+            stmt.setString(1, e.getNome_eleitor());
+            stmt.setString(2, e.getCep());
+            stmt.setInt(3, e.getZona());
+            stmt.setInt(4, e.getSecao());
+            stmt.setString(5, e.getData_nasc());
+            stmt.setString(6, e.getRua());
+            stmt.setString(7, e.getBairro());
+            stmt.setString(8, e.getNumero());
+            stmt.setString(9, e.getCpf());
             stmt.executeUpdate();
-            return true;            
+            return true;
         } catch (SQLException ex) {
-            System.err.println("Erro: "+ex);
+            System.err.println("Erro: " + ex);
             return false;
-        }finally{
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+
+    public boolean delete(Eleitor e) {
+        String sql = "DELETE FROM eleitor WHERE cpf = ?";
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setString(1, e.getCpf());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+            return false;
+        } finally {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }

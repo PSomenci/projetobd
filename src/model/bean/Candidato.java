@@ -12,8 +12,8 @@ package model.bean;
 public class Candidato {
 
     private String nome_candidato;
-    private int num_candidato;
     private String cargo;
+    private int num_candidato;
     private Partido num_partido;
 
     public String getNome_candidato() {
@@ -24,20 +24,20 @@ public class Candidato {
         this.nome_candidato = nome_candidato;
     }
 
-    public int getNum_candidato() {
-        return num_candidato;
-    }
-
-    public void setNum_candidato(int num_candidato) {
-        this.num_candidato = num_candidato;
-    }
-
     public String getCargo() {
         return cargo;
     }
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    public int getNum_candidato() {
+        return num_candidato;
+    }
+
+    public void setNum_candidato(int num_candidato) {
+        this.num_candidato = num_candidato;
     }
 
     public Partido getNum_partido() {
@@ -47,7 +47,5 @@ public class Candidato {
     public void setNum_partido(Partido num_partido) {
         this.num_partido = num_partido;
     }
-
-   
 
 }

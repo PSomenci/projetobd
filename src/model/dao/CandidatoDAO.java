@@ -17,6 +17,9 @@ import model.bean.Candidato;
 /**
  *
  * @author pedro
+ * inserir
+ * modificar
+ * deletar
  */
 public class CandidatoDAO {
     
@@ -32,7 +35,7 @@ public class CandidatoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO candidato (nome_candidato, num_candidato, cargo, num_partido) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO candidato (nome_candidato, cargo, num_candidato, num_partido) VALUES (?,?,?,?)");
             stmt.setString(1, c.getNome_candidato());
             stmt.setInt(2, c.getNum_candidato());
             stmt.setString(3, c.getCargo());
@@ -48,16 +51,15 @@ public class CandidatoDAO {
     
     public boolean update(Candidato c){
         
-        String sql = "UPDATE categoria SET nome_candidato = ? cargo = ? num_partido = ? WHERE num_cadidato = ?";
+        String sql = "UPDATE candidato SET nome_candidato = ? cargo = ? WHERE num_cadidato = ?";
         
         PreparedStatement stmt = null;
         
         try {
             stmt = con.prepareStatement(sql);
             stmt.setString(1, c.getNome_candidato());
-            stmt.setInt(2, c.getNum_candidato());
-            stmt.setString(3, c.getCargo());
-            stmt.setInt(4, c.getNum_partido().getNum_partido());
+            stmt.setString(2, c.getCargo());
+            stmt.setInt(3, c.getNum_candidato());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -75,7 +77,7 @@ public class CandidatoDAO {
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(2, c.getNum_candidato());
+            stmt.setInt(1, c.getNum_candidato());
             stmt.executeUpdate();
             return true;            
         } catch (SQLException ex) {

@@ -12,15 +12,14 @@ package model.bean;
 public class Eleitor {
 
     private String nome_eleitor;
-    private int cpf;
-    private int cep;
+    private String cpf;
+    private String cep;
     private int zona;
     private int secao;
     private String data_nasc;
     private String rua;
     private String bairro;
     private String numero;
-    private Urna cod_voto;
 
     public String getNome_eleitor() {
         return nome_eleitor;
@@ -30,19 +29,19 @@ public class Eleitor {
         this.nome_eleitor = nome_eleitor;
     }
 
-    public int getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public int getCep() {
+    public String getCep() {
         return cep;
     }
 
-    public void setCep(int cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
@@ -94,15 +93,4 @@ public class Eleitor {
         this.numero = numero;
     }
 
-    public Urna getCod_voto() {
-        return cod_voto;
-    }
-
-    public void setCod_voto(Urna cod_voto) {
-        this.cod_voto = cod_voto;
-    }
-
-    
-
-    
 }

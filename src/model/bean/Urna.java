@@ -11,16 +11,15 @@ package model.bean;
  */
 public class Urna {
 
-    private String data_voto;
+    private Eleitor cpf;
     private int voto;
-    private int cod_voto;
 
-    public String getData_voto() {
-        return data_voto;
+    public Eleitor getCpf() {
+        return cpf;
     }
 
-    public void setData_voto(String data_voto) {
-        this.data_voto = data_voto;
+    public void setCpf(Eleitor cpf) {
+        this.cpf = cpf;
     }
 
     public int getVoto() {
@@ -30,18 +29,5 @@ public class Urna {
     public void setVoto(int voto) {
         this.voto = voto;
     }
-
-    public int getCod_voto() {
-        return cod_voto;
-    }
-
-    public void setCod_voto(int cod_voto) {
-        this.cod_voto = cod_voto;
-    }
-
-    
-    
-
-
 
 }

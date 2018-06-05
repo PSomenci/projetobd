@@ -17,48 +17,67 @@ import model.bean.Partido;
 
 /**
  *
- * @author pedro
+ * @author pedro inserir deletar modificar
  */
 public class PartidoDAO {
-    
+
     private Connection con = null;
 
     public PartidoDAO() {
         con = ConnectionFactory.getConnection();
     }
- 
-    public void create(Partido p){
-        
+
+    public void create(Partido p) {
+
         //Connection con = ConnectionFactory.getConnection();
         PreparedStatement stmt = null;
-        
+
         try {
-            stmt = con.prepareStatement("INSERT INTO partido (nome_partido, num_partido, data_criacao) VALUES (?,?,?)");
-            stmt.setString(1, p.getNome_partido() );
+            stmt = con.prepareStatement("INSERT INTO partido (nome_partido, num_partido) VALUES (?,?)");
+            stmt.setString(1, p.getNome_partido());
             stmt.setInt(2, p.getNum_partido());
-            stmt.setString(3, p.getData_criacao());
-            
+
             stmt.executeUpdate();
-            
+
             JOptionPane.showMessageDialog(null, "Salvo com sucesso!!");
-            
+
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao salvar: "+ex);
-        }finally {
-           ConnectionFactory.closeConnection(con, stmt);
+            JOptionPane.showMessageDialog(null, "Erro ao salvar: " + ex);
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
+        }
+    }
+
+    public boolean delete(Partido p) {
+        String sql = "DELETE FROM partido WHERE num_partido = ?";
+
+        PreparedStatement stmt = null;
+
+        try {
+            stmt = con.prepareStatement(sql);
+            stmt.setInt(2, p.getNum_partido());
+            stmt.executeUpdate();
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Erro: " + ex);
+            return false;
+        } finally {
+            ConnectionFactory.closeConnection(con, stmt);
         }
     }
     
-    public boolean delete (Partido p){
-        String sql = "DELETE FROM partido WHERE num_partido = ?";
+    public boolean update(Partido c){
+        
+        String sql = "UPDATE partido SET nome_partido = ? WHERE num_partido = ?";
         
         PreparedStatement stmt = null;
         
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setInt(2, p.getNum_partido());
+            stmt.setString(1, c.getNome_partido());
+            stmt.setInt(2, c.getNum_partido());
             stmt.executeUpdate();
-            return true;            
+            return true;
         } catch (SQLException ex) {
             System.err.println("Erro: "+ex);
             return false;
@@ -66,5 +85,5 @@ public class PartidoDAO {
             ConnectionFactory.closeConnection(con, stmt);
         }
     }
-    
+
 }

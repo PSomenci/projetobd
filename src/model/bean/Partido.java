@@ -15,7 +15,6 @@ public class Partido {
     
     private String nome_partido;
     private int num_partido;
-    private String data_criacao;
 
     public String getNome_partido() {
         return nome_partido;
@@ -32,15 +31,8 @@ public class Partido {
     public void setNum_partido(int num_partido) {
         this.num_partido = num_partido;
     }
-
-    public String getData_criacao() {
-        return data_criacao;
-    }
-
-    public void setData_criacao(String data_criacao) {
-        this.data_criacao = data_criacao;
-    }
-
+    
+    
     
 
 
