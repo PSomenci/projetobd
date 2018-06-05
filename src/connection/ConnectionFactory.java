@@ -19,10 +19,10 @@ import java.util.logging.Logger;
  */
 public class ConnectionFactory {
     
-        private static final String DRIVER = "oracle.jdbc.driver.OracleDriver";
-        private static final String URL = "jdbc:oracle:thin:@200.145.158.211:1521:XE";
-        private static final String USER = "ldcjfunior";
-        private static final String PASS = "junior";
+        private static final String DRIVER = "com.mysql.jdbc.Driver";
+        private static final String URL = "jdbc:mysql://127.0.0.1:3306/scev";
+        private static final String USER = "root";
+        private static final String PASS = "";
         
         public  static Connection getConnection(){
             try {
