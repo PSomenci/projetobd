@@ -7,6 +7,8 @@ package view;
 
 import java.time.Instant;
 import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import model.bean.Partido;
 import model.dao.PartidoDAO;
 
@@ -21,6 +23,22 @@ public class ViewPartido extends javax.swing.JFrame {
      */
     public ViewPartido() {
         initComponents();
+        DefaultTableModel modelo = (DefaultTableModel) jTable2.getModel();
+        jTable2.setRowSorter(new TableRowSorter(modelo));
+        
+        readTable();
+    }
+    //mexer depois
+    public void readTable (){
+        
+        PartidoDAO pdao = new PartidoDAO();
+        
+        pdao.findAll().stream().map((p) -> {
+            p.getNome_partido();
+            return p;
+        }).forEachOrdered((p) -> {
+            p.getNum_partido();
+        });
     }
 
     /**
@@ -37,18 +55,16 @@ public class ViewPartido extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         btnVoltar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtNomePartido = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnCriar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtNumPartido = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        txtDataCriacao = new javax.swing.JFormattedTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Partidos");
@@ -100,55 +116,39 @@ public class ViewPartido extends javax.swing.JFrame {
                 .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
         jLabel2.setText("Nome");
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-salvar.png"))); // NOI18N
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setBackground(new java.awt.Color(51, 51, 255));
+        btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-salvar.png"))); // NOI18N
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 51, 255));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-excluir.png"))); // NOI18N
-        jButton2.setText("Excluir");
-
-        jButton3.setBackground(new java.awt.Color(51, 51, 255));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-novo.png"))); // NOI18N
-        jButton3.setText("Novo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setBackground(new java.awt.Color(51, 51, 255));
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-excluir.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnCriar.setBackground(new java.awt.Color(51, 51, 255));
+        btnCriar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCriar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-novo.png"))); // NOI18N
+        btnCriar.setText("Criar");
+        btnCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarActionPerformed(evt);
             }
         });
 
         jLabel4.setText("Número Partido");
-
-        jLabel5.setText("Data Criação");
-
-        try {
-            txtDataCriacao.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -159,20 +159,18 @@ public class ViewPartido extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNomePartido)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 40, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addGap(0, 36, Short.MAX_VALUE)
+                        .addComponent(btnCriar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnAlterar))
                     .addComponent(txtNumPartido)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtDataCriacao))
+                            .addComponent(jLabel4))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -186,17 +184,35 @@ public class ViewPartido extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtNumPartido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtDataCriacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 155, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnCriar))
                 .addContainerGap())
         );
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nome", "Número"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jTable2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,8 +232,8 @@ public class ViewPartido extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -236,24 +252,24 @@ public class ViewPartido extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        if(txtNomePartido.getText().trim().equals("") || txtNumPartido.getText().trim().equals("") || txtDataCriacao.getText().trim().equals("") ){
+        if(txtNomePartido.getText().trim().equals("") || txtNumPartido.getText().trim().equals("")){
             System.out.println("Preencha todos os campos");
         }else{
             System.out.println("Campo preenchido");
             Partido p = new Partido();
             PartidoDAO dao = new PartidoDAO();
             
-            p.setNome(txtNomePartido.getText());
+            p.setNome_partido(txtNomePartido.getText());
             p.setNum_partido(Integer.parseInt(txtNumPartido.getText()));
-            p.setData_criacao(txtDataCriacao.getText());
-            dao.create(p);
+            dao.update(p);
+            readTable();
         }
         
         
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
@@ -261,14 +277,36 @@ public class ViewPartido extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
         // TODO add your handling code here:
-        txtNomePartido.setText("");
-        txtDataCriacao.setText("");
-        txtNumPartido.setText("");
-        
-    }//GEN-LAST:event_jButton3ActionPerformed
-
+        if(txtNomePartido.getText().trim().equals("") || txtNumPartido.getText().trim().equals("")){
+            System.out.println("Preencha todos os campos");
+        }else{
+            System.out.println("Campo preenchido");
+            Partido p = new Partido();
+            PartidoDAO dao = new PartidoDAO();
+            
+            p.setNome_partido(txtNomePartido.getText());
+            p.setNum_partido(Integer.parseInt(txtNumPartido.getText()));
+            dao.create(p);
+            readTable();
+    }//GEN-LAST:event_btnCriarActionPerformed
+    }
+    
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        if(txtNumPartido.getText().trim().equals("")){
+            System.out.println("Preencha todos os campos");
+        }else{
+            System.out.println("Campo preenchido");
+            Partido p = new Partido();
+            PartidoDAO dao = new PartidoDAO();
+            
+            p.setNum_partido(Integer.parseInt(txtNumPartido.getText()));
+            dao.delete(p);
+            readTable();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+    }
     /**
      * @param args the command line arguments
      */
@@ -298,29 +336,26 @@ public class ViewPartido extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ViewPartido().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new ViewPartido().setVisible(true);
+            
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCriar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JFormattedTextField txtDataCriacao;
+    private javax.swing.JTable jTable2;
     private javax.swing.JTextField txtNomePartido;
     private javax.swing.JTextField txtNumPartido;
     // End of variables declaration//GEN-END:variables

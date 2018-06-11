@@ -55,9 +55,9 @@ public class ViewCandidato extends javax.swing.JFrame {
         ComboBoxPartido = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         txtNumCandidato = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnCriar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtCargo = new javax.swing.JTextField();
 
@@ -136,25 +136,30 @@ public class ViewCandidato extends javax.swing.JFrame {
 
         jLabel5.setText("Número");
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-salvar.png"))); // NOI18N
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setBackground(new java.awt.Color(51, 51, 255));
+        btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-salvar.png"))); // NOI18N
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 51, 255));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-excluir.png"))); // NOI18N
-        jButton2.setText("Excluir");
+        btnExcluir.setBackground(new java.awt.Color(51, 51, 255));
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-excluir.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
 
-        jButton3.setBackground(new java.awt.Color(51, 51, 255));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-novo.png"))); // NOI18N
-        jButton3.setText("Novo");
+        btnCriar.setBackground(new java.awt.Color(51, 51, 255));
+        btnCriar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCriar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-novo.png"))); // NOI18N
+        btnCriar.setText("Criar");
+        btnCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Cargo");
 
@@ -175,12 +180,12 @@ public class ViewCandidato extends javax.swing.JFrame {
                     .addComponent(ComboBoxPartido, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtNumCandidato)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 89, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addGap(0, 87, Short.MAX_VALUE)
+                        .addComponent(btnCriar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnAlterar))
                     .addComponent(txtCargo)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,9 +217,9 @@ public class ViewCandidato extends javax.swing.JFrame {
                 .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnCriar))
                 .addContainerGap())
         );
 
@@ -258,7 +263,7 @@ public class ViewCandidato extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
         if (txtNomeCandidato.getText().trim().equals("") || txtNumCandidato.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Alerta", JOptionPane.WARNING_MESSAGE);
@@ -272,7 +277,7 @@ public class ViewCandidato extends javax.swing.JFrame {
             c.setNum_candidato(Integer.parseInt(txtNumCandidato.getText()));
             c.setCargo(txtCargo.getText());
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
@@ -289,6 +294,21 @@ public class ViewCandidato extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCargoActionPerformed
 
+    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
+        // TODO add your handling code here:
+        if(txtNomeCandidato.getText().trim().equals("") || txtNumCandidato.getText().trim().equals("") || txtCargo.getText().trim().equals("")){
+            System.out.println("Preencha todos os campos");
+        }else{
+            System.out.println("Campo preenchido");
+            Candidato c = new Candidato();
+            CandidatoDAO dao = new CandidatoDAO();
+            
+            c.setNome_candidato(txtNomeCandidato.getText());
+            c.setNum_candidato(Integer.parseInt(txtNumCandidato.getText()));
+            c.setCargo(txtCargo.getText());
+            dao.create(c);
+    }//GEN-LAST:event_btnCriarActionPerformed
+    }
     
 
     public void listaComboPartido() {
@@ -349,10 +369,10 @@ public class ViewCandidato extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox ComboBoxPartido;
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCriar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

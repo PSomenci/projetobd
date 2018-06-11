@@ -51,9 +51,9 @@ public class ViewEleitor extends javax.swing.JFrame {
         txtBairro = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtNumero = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
+        btnCriar = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtZona = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
@@ -146,28 +146,33 @@ public class ViewEleitor extends javax.swing.JFrame {
 
         jLabel8.setText("Número");
 
-        jButton1.setBackground(new java.awt.Color(51, 51, 255));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-salvar.png"))); // NOI18N
-        jButton1.setText("Salvar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setBackground(new java.awt.Color(51, 51, 255));
+        btnAlterar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-salvar.png"))); // NOI18N
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
             }
         });
 
-        jButton2.setBackground(new java.awt.Color(51, 51, 255));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-excluir.png"))); // NOI18N
-        jButton2.setText("Excluir");
-
-        jButton3.setBackground(new java.awt.Color(51, 51, 255));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-novo.png"))); // NOI18N
-        jButton3.setText("Novo");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btnExcluir.setBackground(new java.awt.Color(51, 51, 255));
+        btnExcluir.setForeground(new java.awt.Color(255, 255, 255));
+        btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-excluir.png"))); // NOI18N
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnCriar.setBackground(new java.awt.Color(51, 51, 255));
+        btnCriar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCriar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/btn-novo.png"))); // NOI18N
+        btnCriar.setText("Criar");
+        btnCriar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCriarActionPerformed(evt);
             }
         });
 
@@ -209,12 +214,12 @@ public class ViewEleitor extends javax.swing.JFrame {
                     .addComponent(txtBairro)
                     .addComponent(txtNumero)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 40, Short.MAX_VALUE)
-                        .addComponent(jButton3)
+                        .addGap(0, 38, Short.MAX_VALUE)
+                        .addComponent(btnCriar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2)
+                        .addComponent(btnExcluir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(btnAlterar))
                     .addComponent(txtZona)
                     .addComponent(txtSecao)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -273,9 +278,9 @@ public class ViewEleitor extends javax.swing.JFrame {
                 .addComponent(txtDatanasc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnAlterar)
+                    .addComponent(btnExcluir)
+                    .addComponent(btnCriar))
                 .addContainerGap())
         );
 
@@ -317,28 +322,28 @@ public class ViewEleitor extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         // TODO add your handling code here:
-        if(txtNomeEleitor.getText().trim().equals("") || txtCPF.getText().trim().length() != 14 || txtCEP.getText().trim().length() != 9 || txtRua.getText().trim().equals("") || txtBairro.getText().trim().equals("") || txtNumero.getText().trim().equals("")){
+        if (txtNomeEleitor.getText().trim().equals("") || txtCPF.getText().trim().length() != 14 || txtCEP.getText().trim().length() != 9 || txtRua.getText().trim().equals("") || txtBairro.getText().trim().equals("") || txtNumero.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Alerta", JOptionPane.WARNING_MESSAGE);
-        }else{
+        } else {
             System.out.println("Campo preenchido");
             Eleitor e = new Eleitor();
             EleitorDAO dao = new EleitorDAO();
-            
-            e.setNome(txtNomeEleitor.getText());
+
+            e.setNome_eleitor(txtNomeEleitor.getText());
             e.setCpf(txtCPF.getText());
             e.setCep(txtCEP.getText());
+            e.setZona(Integer.parseInt(txtZona.getText()));
+            e.setSecao(Integer.parseInt(txtSecao.getText()));
+            e.setData_nasc(txtDatanasc.getText());
             e.setRua(txtRua.getText());
             e.setBairro(txtBairro.getText());
             e.setNumero(txtNumero.getText());
-            e.setZona(txtZona.getText());
-            e.setSecao(txtSecao.getText());
-            e.setData_nasc(txtDatanasc.getText());
-            dao.create(e);
-            
+            dao.update(e);
+
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
     private void txtZonaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtZonaActionPerformed
         // TODO add your handling code here:
@@ -350,23 +355,47 @@ public class ViewEleitor extends javax.swing.JFrame {
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
         // TODO add your handling code here:
-        
+
         new ViewPrincipal().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btnCriarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCriarActionPerformed
         // TODO add your handling code here:
-        txtNomeEleitor.setText("");
-        txtCPF.setText("");
-        txtCEP.setText("");
-        txtRua.setText("");
-        txtBairro.setText("");
-        txtNumero.setText("");
-        txtZona.setText("");
-        txtSecao.setText("");
-        txtDatanasc.setText("");
-    }//GEN-LAST:event_jButton3ActionPerformed
+        if (txtNomeEleitor.getText().trim().equals("") || txtCPF.getText().trim().length() != 14 || txtCEP.getText().trim().length() != 9 || txtRua.getText().trim().equals("") || txtBairro.getText().trim().equals("") || txtNumero.getText().trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Alerta", JOptionPane.WARNING_MESSAGE);
+        } else {
+            System.out.println("Campo preenchido");
+            Eleitor e = new Eleitor();
+            EleitorDAO dao = new EleitorDAO();
+
+            e.setNome_eleitor(txtNomeEleitor.getText());
+            e.setCpf(txtCPF.getText());
+            e.setCep(txtCEP.getText());
+            e.setZona(Integer.parseInt(txtZona.getText()));
+            e.setSecao(Integer.parseInt(txtSecao.getText()));
+            e.setData_nasc(txtDatanasc.getText());
+            e.setRua(txtRua.getText());
+            e.setBairro(txtBairro.getText());
+            e.setNumero(txtNumero.getText());
+            dao.create(e);
+
+        }
+    }//GEN-LAST:event_btnCriarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        // TODO add your handling code here:
+        if (txtCPF.getText().trim().length() != 14) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos", "Alerta", JOptionPane.WARNING_MESSAGE);
+        } else {
+            System.out.println("Campo preenchido");
+            Eleitor e = new Eleitor();
+            EleitorDAO dao = new EleitorDAO();
+
+            e.setCpf(txtCPF.getText());
+            dao.delete(e);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,10 +433,10 @@ public class ViewEleitor extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCriar;
+    private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVoltar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

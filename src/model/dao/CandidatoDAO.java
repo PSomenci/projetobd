@@ -35,7 +35,7 @@ public class CandidatoDAO {
         PreparedStatement stmt = null;
 
         try {
-            stmt = con.prepareStatement("INSERT INTO candidato (nome_candidato, cargo, num_candidato, num_partido) VALUES (?,?,?,?)");
+            stmt = con.prepareStatement("INSERT INTO candidato (nome_candidato, cargo, num_candidato, num_partido) VALUES (?,?,?,123)");
             stmt.setString(1, c.getNome_candidato());
             stmt.setInt(2, c.getNum_candidato());
             stmt.setString(3, c.getCargo());
